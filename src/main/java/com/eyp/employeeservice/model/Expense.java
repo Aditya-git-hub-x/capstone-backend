@@ -25,6 +25,26 @@ public class Expense {
 	@Column
 	Long eid;
 	
+	@Column
+	String status;
+	
+	public Expense(Long exid, String type, int amount, Long eid, String status) {
+		super();
+		this.exid = exid;
+		this.type = type;
+		this.amount = amount;
+		this.eid = eid;
+		this.status = status;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	Expense(){
 		
 	}

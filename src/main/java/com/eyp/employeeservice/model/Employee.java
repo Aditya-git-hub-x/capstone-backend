@@ -18,11 +18,21 @@ public class Employee {
 	@Column
 	private String name;
 	
+	@Column
+	private Long mid;
+	
+	public Long getMid() {
+		return mid;
+	}
+	public void setMid(Long mid) {
+		this.mid = mid;
+	}
 	public Employee() {
 		
 	}
-	public Employee(Long id, String name) {
+	public Employee(Long id, String name, Long mid) {
 		super();
+		this.mid = mid;
 		this.name = name;
 	}
 	
