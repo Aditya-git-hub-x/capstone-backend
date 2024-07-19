@@ -16,38 +16,104 @@ public class Employee {
 	private Long id;
 	
 	@Column
-	private String name;
+	private String firstName;
 	
 	@Column
-	private Long mid;
+	private String lastName;
 	
-	public Long getMid() {
-		return mid;
+	@Column
+	private Long mobile;
+	
+	@Column
+	private String email;
+	
+	@Column
+	private String isManager;
+	
+	
+	public Employee(Long id, String firstName, String lastName, Long mobile, String email, String isManager) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobile = mobile;
+		this.email = email;
+		this.isManager = isManager;
 	}
-	public void setMid(Long mid) {
-		this.mid = mid;
+
+
+	public String getIsManager() {
+		return isManager;
 	}
+
+
+	public void setIsManager(String isManager) {
+		this.isManager = isManager;
+	}
+
+
 	public Employee() {
 		
 	}
-	public Employee(Long id, String name, Long mid) {
+	
+	
+	public Employee(String firstName, String lastName, Long mobile, String email) {
 		super();
-		this.mid = mid;
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobile = mobile;
+		this.email = email;
 	}
 	
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+	public Long getMobile() {
+		return mobile;
+	}
+
+
+	public void setMobile(Long mobile) {
+		this.mobile = mobile;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 	
 	
 

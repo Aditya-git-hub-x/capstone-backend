@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 
@@ -14,27 +15,62 @@ public class Expense {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long exid;
+	private Long exid;
 	
 	@Column
-	String type;
+	private String type;
+	
+	@Column
+	private String status;
 	
 	@Column 
-	int amount;
+	private int amount;
 	
 	@Column
-	Long eid;
+	private Long eid;
 	
-	@Column
-	String status;
-	
-	public Expense(Long exid, String type, int amount, Long eid, String status) {
+	public Expense(Long exid, String type, String status, int amount, Long eid, byte[] bill, String billName) {
 		super();
 		this.exid = exid;
 		this.type = type;
+		this.status = status;
 		this.amount = amount;
 		this.eid = eid;
+		this.bill = bill;
+		this.billName = billName;
+	}
+
+	@Column
+	@Lob
+	private byte[] bill;
+	
+	@Column
+	private String billName;
+	
+	public String getBillName() {
+		return billName;
+	}
+
+	public void setBillName(String billName) {
+		this.billName = billName;
+	}
+
+	public Expense(Long exid, String type, String status, int amount, Long eid, byte[] bill) {
+		super();
+		this.exid = exid;
+		this.type = type;
 		this.status = status;
+		this.amount = amount;
+		this.eid = eid;
+		this.bill = bill;
+	}
+
+	public Expense(String type, int amount, Long eid, byte[] bill) {
+		super();
+		this.type = type;
+		this.amount = amount;
+		this.eid = eid;
+		this.bill = bill;
 	}
 
 	public String getStatus() {
@@ -49,11 +85,13 @@ public class Expense {
 		
 	}
 
-	public Expense(String type, int amount, Long eid) {
-		super();
-		this.type = type;
-		this.amount = amount;
-		this.eid = eid;
+
+	public byte[] bill() {
+		return bill;
+	}
+
+	public void setImageData(byte[] bill) {
+		this.bill = bill;
 	}
 
 	public Long getExid() {

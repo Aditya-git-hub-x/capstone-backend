@@ -29,28 +29,39 @@ public class ExpenseController {
 	private ExpenseRepository expenseRepository;
 	
 	@GetMapping("/exp")
-	public List<Expense> getAllEmployees(){
+	public List<Expense> getAllExpense(){
 		return expenseRepository.findAll();
 	}
 	@PostMapping("/exp")
-	public Expense createEmployee(@RequestBody Expense expense) {
+	public Expense createExpense(@RequestBody Expense expense) {
 		expense.setStatus("Pending");
 		return expenseRepository.save(expense);
 	} 
 	
 	@GetMapping("/exp/{exid}")
 	public ResponseEntity<Expense> getExpenseById(@PathVariable Long exid) {
-		Expense employee = expenseRepository.findById(exid)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + exid));
-		return ResponseEntity.ok(employee);
+		Expense expense = expenseRepository.findById(exid)
+				.orElseThrow(() -> new ResourceNotFoundException("Expense not exist with id :" + exid));
+		return ResponseEntity.ok(expense);
 	}
 	
-	@PutMapping("/exp/{exid}")
-	public ResponseEntity<Expense> updateExpense(@PathVariable Long exid){
+	@PutMapping("/exp/approve/{exid}")
+	public ResponseEntity<Expense> updateExpenseApprove(@PathVariable Long exid){
 		Expense expense = expenseRepository.findById(exid)
 				.orElseThrow(() -> new ResourceNotFoundException("Expense not exist with id :" + exid));
 		
 		expense.setStatus("Approved");
+		
+		Expense updatedExpense = expenseRepository.save(expense);
+		return ResponseEntity.ok(updatedExpense);
+	}
+	
+	@PutMapping("/exp/reject/{exid}")
+	public ResponseEntity<Expense> updateExpenseReject(@PathVariable Long exid){
+		Expense expense = expenseRepository.findById(exid)
+				.orElseThrow(() -> new ResourceNotFoundException("Expense not exist with id :" + exid));
+		
+		expense.setStatus("Rejected");
 		
 		Expense updatedExpense = expenseRepository.save(expense);
 		return ResponseEntity.ok(updatedExpense);
@@ -66,5 +77,11 @@ public class ExpenseController {
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
 	}
+	
+	@GetMapping("/exp/eid/{eid}")
+	public List<Expense> getAllExpenseByEid(@PathVariable Long eid) {
+		return expenseRepository.findByEid(eid);
+	}
+	
 
 }
